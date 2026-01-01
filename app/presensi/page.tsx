@@ -140,7 +140,10 @@ export default function PresensiPage() {
 
       const { error: uploadError } = await supabase.storage
         .from("presensi-foto")
-        .upload(fileName, photoBlob);
+        .upload(fileName, photoBlob, {
+          contentType: "image/jpeg",
+          upsert: false,}
+        );
 
       if (uploadError) throw new Error("Gagal upload foto");
 
