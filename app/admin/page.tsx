@@ -47,8 +47,8 @@ export default function AdminPage() {
       // PRIORITAS 1 → FILTER TANGGAL
       if (filterDate) {
         filtered = filtered.filter((r) => {
-          const recordDate = r.created_at.split("T")[0];
-          return recordDate === filterDate;
+          const localDate = new Date(r.created_at).toLocaleDateString("en-CA");
+          return localDate === filterDate;
         });
 
         setRecords(filtered);
@@ -58,7 +58,7 @@ export default function AdminPage() {
       // PRIORITAS 2 → FILTER BULAN
       if (filterMonth) {
         filtered = filtered.filter((r) => {
-          const month = r.created_at.slice(0, 7); // YYYY-MM
+          const month = new Date(r.created_at).toLocaleDateString("en-CA").slice(0, 7);
           return month === filterMonth;
         });
       }
